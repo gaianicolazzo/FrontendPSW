@@ -33,11 +33,11 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-            width: 200, // Lunghezza fissata
-            height: 200, // Altezza fissata
+            width: 50, // Lunghezza fissata
+            height: 50, // Altezza fissata
             color: Colors.grey[300], // Colore di sfondo del container
             child: Image.asset(
-              'assets/mycartoleria2.jpg', // Percorso dell'immagine
+              'assets/images/assets/images/brand-mycartoleria.jpg', // Percorso dell'immagine
               fit: BoxFit.cover, // Adatta l'immagine al container
             ),
           ),
