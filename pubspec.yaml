@@ -63,6 +63,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
       - assets/images/brand-mycartoleria.jpg
+      - assets/images/9a6d55df768aecfb0a4b008d8295.jpg
+      - assets/images/cancelleria.png
+      - assets/images/hp_geografia.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
