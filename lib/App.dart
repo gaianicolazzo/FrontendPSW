@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:frontendpsw/pages/Shop.dart';
 import 'package:frontendpsw/Utils/Constant.dart';
@@ -31,7 +33,7 @@ class HomePage extends StatelessWidget {
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
-      backgroundColor: Color.fromARGB(255, 240,240,240),
+      backgroundColor: Color.fromARGB(255, 240, 240, 240),
       flexibleSpace: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,18 +48,19 @@ Widget build(BuildContext context) {
               ),
             ),
           ),
+          const Spacer(flex: 1),
           Expanded(
             flex: 1,
             child: TextButton(
-              onPressed: () { 
+              onPressed: () {
                 Navigator.pushReplacement(
-                  context, 
+                  context,
                   MaterialPageRoute(builder: (context) => const Shop()),
                 );
               },
               style: TextButton.styleFrom(
                 textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: Color.fromARGB(250,241,124,1),
+                foregroundColor: arancio,
               ),
               child: const Text(
                 'SHOP',
@@ -68,15 +71,15 @@ Widget build(BuildContext context) {
           Expanded(
             flex: 1,
             child: TextButton(
-              onPressed: () { 
+              onPressed: () {
                 Navigator.pushReplacement(
-                  context, 
+                  context,
                   MaterialPageRoute(builder: (context) => const Info()),
                 );
               },
               style: TextButton.styleFrom(
                 textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: Color.fromARGB(250,12,85,134),
+                foregroundColor: blu,
               ),
               child: const Text(
                 'CHI SIAMO',
@@ -87,15 +90,15 @@ Widget build(BuildContext context) {
           Expanded(
             flex: 1,
             child: TextButton(
-              onPressed: () { 
+              onPressed: () {
                 Navigator.pushReplacement(
-                  context, 
+                  context,
                   MaterialPageRoute(builder: (context) => const Contacts()),
                 );
               },
               style: TextButton.styleFrom(
                 textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: Color.fromARGB(250,241,124,1),
+                foregroundColor: arancio,
               ),
               child: const Text(
                 'CONTATTI',
@@ -106,7 +109,7 @@ Widget build(BuildContext context) {
           Expanded(
             flex: 1,
             child: IconButton(
-              color: Color.fromARGB(250,12,85,134),
+              color:blu,
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
@@ -116,22 +119,40 @@ Widget build(BuildContext context) {
               icon: const Icon(Icons.login),
             ),
           ),
+          const Expanded(flex : 1 ,child: PreferredSize(preferredSize: Size.fromHeight(20.0),
+            child: Padding(
+              padding: EdgeInsets.all(5.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Cerca...',
+                  labelStyle: TextStyle(color:blu),
+                  border: OutlineInputBorder(borderSide: BorderSide(color:arancio)),
+                  focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: arancio), // Colore del bordo quando il TextField ha il focus
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: arancio), // Colore del bordo quando il TextField non ha il focus
+                ),
+                ),cursorColor: blu,
+              ),
+            ),
+          ),),
+          const Spacer(flex: 1),
           Expanded(
             child: ElevatedButton.icon(
-              icon: const Icon(Icons.shopping_bag, color: Color.fromARGB(250,12,85,134)),
-              label: const Text("Carrello",),
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-      // Imposta il colore di sfondo del pulsante
-              return Colors.white; // Colore di sfondo predefinito
-    }),foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-      // Imposta il colore del testo in base allo stato del pulsante
-      if (states.contains(MaterialState.pressed)) {
-        // Colore del testo quando il pulsante è premuto
-        return Color.fromARGB(250,12,85,134);
-      }
-      // Colore del testo predefinito
-      return Color.fromARGB(250,12,85,134);
-    }),),
+              icon: const Icon(Icons.shopping_bag, color: blu),
+              label: const Text("Carrello"),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  return Colors.white;
+                }),
+                foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return blu;
+                  }
+                  return blu;
+                }),
+              ),
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
@@ -142,18 +163,161 @@ Widget build(BuildContext context) {
           )
         ],
       ),
-    ), 
-    body: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Spazio vuoto per separare l'app bar dalla vetrina di immagini
-        const SizedBox(height: 2),
-        // Vetrina di immagini
-        MySlideshow()
-      ],
     ),
-  );
-}
+    body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+              const SizedBox(height: 2),
+              MySlideshow(),
+              const SizedBox(height: 20),
+              Container( color: Colors.white,child: 
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'La tua cartoleria online per la scuola e il tempo libero', 
+                          style: GoogleFonts.pacifico(color: blu,fontSize: 20),
+                        ),
+                        Text(
+                          '\n\n Acquista online e ricevi la merce comodamente a casa.\n Sei della provincia di Catanzaro? Azzera i costi di spedizione. \n Scegli il "ritiro in negozio".',
+                          style: GoogleFonts.fjallaOne(color: blu,),
+                        ),
+                        const SizedBox(height: 20),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => const Shop()),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            textStyle: GoogleFonts.fjallaOne(),
+                            foregroundColor: arancio,
+                          ),
+                          child: const Text(
+                            'Scopri i nostri prodotti',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 50.0),
+                      child: SizedBox(
+                        height: 600,
+                        width: 400,
+                        child: Image.asset('assets/images/cartoleria.jpg', fit: BoxFit.contain),
+                      ),
+                    ),
+                  ),
+                ],
+              ),),
+              Container(
+                decoration: BoxDecoration(color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.8),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                height: 350,
+                child: Column(
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Spacer(flex: 1),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 120,
+                                  width: 120,
+                                  child: Image.asset(
+                                    'assets/images/4212257.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Text(
+                                  '\n Spedizioni rapide',
+                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                Text(
+                                  "\n La consegna avviene entro 1/5 giorni \n lavorativi con corriere all'indirizzo \n che inserirete in fase di pagamento.",
+                                  style: GoogleFonts.fjallaOne(color: Colors.black,)
+                                )], 
+                                ),
+                          ),Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const SizedBox(width: 30,height: 30,),
+                                SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Image.asset(
+                                    'assets/images/securitypayment.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Text(
+                                  '\n Pagamenti sicuri',
+                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                Text(
+                                  '\n Sul nostro sito sono accettati i \n pagamenti con Bonifico Bancario\n e Paypal, con le principali carte di \n Credito accettate dal circuito:',
+                                  style: GoogleFonts.fjallaOne(color: Colors.black)
+                                )], 
+                                )
+                          ),Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const SizedBox(width: 30,height: 30,),
+                                SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Image.asset(
+                                    'assets/images/italy map.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Text(
+                                  '\n Spedizioni in tutta Italia',
+                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                Text(
+                                  '\n Spediamo in tutta Italia, costi \n di spedizione calcolati in base a peso \n e dimensione del collo da spedire.',
+                                  style: GoogleFonts.fjallaOne(color: Colors.black)
+                                )], 
+                                )
+                          ),const Spacer(flex: 1), // Aggiunge spazio flessibile a destra
+                          ],
+                    ))]
+            )),]
+      ,),),
+  );}));}
 }
 
 
@@ -167,12 +331,33 @@ class _MySlideshowState extends State<MySlideshow> {
   late PageController _pageController;
   int _currentPage = 0;
   late Timer _timer;
+  late List<VoidCallback> _imageActions; // Dichiarazione della lista _imageActions
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
     _startTimer();
+    
+    // Inizializzazione della lista _imageActions
+    _imageActions = [
+      () {
+        // Azione per la prima immagine
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Shop()),
+        );
+      },
+      () {
+        // Azione per la seconda immagine
+        // Aggiungi qui la tua azione personalizzata
+      },
+      () {
+        // Azione per la terza immagine
+        // Aggiungi qui la tua azione personalizzata
+      },
+      // Aggiungi altre azioni per le immagini successive
+    ];
   }
 
   @override
@@ -213,13 +398,7 @@ class _MySlideshowState extends State<MySlideshow> {
         itemCount: _images.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {
-              // Azioni da eseguire quando si fa clic sull'immagine
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Shop()),
-              );
-            },
+            onTap: _imageActions[index], // Utilizzo dell'azione corrispondente
             child: Image.asset(
               _images[index],
               fit: BoxFit.cover,
@@ -235,10 +414,6 @@ class _MySlideshowState extends State<MySlideshow> {
     );
   }
 }
-
-
-
-
 
 
      
