@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:frontendpsw/Utils/Constant.dart';
 import 'package:frontendpsw/pages/Backpack.dart';
 import 'package:frontendpsw/pages/Calendar.dart';
+import 'package:frontendpsw/pages/Gifts.dart';
 import 'package:frontendpsw/pages/Stationery.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:frontendpsw/pages/Cart.dart';
@@ -157,14 +156,14 @@ class Shop extends StatelessWidget {
           child: Column(crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             MySlideshow(),
-            Container(height: 20, color: Colors.white),
+            Container(height: 70,color: Colors.white,child:
             Center(
               child: Text(
                 "Le nostre categorie",
-                style: GoogleFonts.pacifico(color: blu, fontSize: 30),
+                style: GoogleFonts.pacifico(color: blu, fontSize: 28),
               ),
-            ),
-            Container(height: 20, color: Colors.white),
+            ),),
+            Container(height: 30, color: Colors.white),
             Container(color:Colors.white, child: 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,crossAxisAlignment: CrossAxisAlignment.center,
@@ -186,7 +185,7 @@ class Shop extends StatelessWidget {
 
                 ],)),
                 Expanded(child: Column(children: [
-                  Image.asset("assets/images/banner-mob.png", width: 200,height: 200,fit: BoxFit.contain,),
+                  Image.asset("assets/images/banner-mob.png", width: 200,height: 200,fit: BoxFit.cover,),
                   TextButton(onPressed: (){Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => const Calendar()),
                     );},
@@ -207,7 +206,7 @@ class Shop extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(child: Column(children: [
-                  Image.asset("assets/images/backpack.png", width: 200,height: 200,fit: BoxFit.cover,),
+                  Image.asset("assets/images/cancelleria-696x464.jpg", width: 200,height: 200,fit: BoxFit.cover,),
                   TextButton(onPressed: (){Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => const Stationery()),
                     );},
@@ -223,23 +222,112 @@ class Shop extends StatelessWidget {
 
                 ],)),
                 Expanded(child: Column(children: [
-                  Image.asset("assets/images/banner-mob.png", width: 200,height: 200,fit: BoxFit.contain,),
+                  Image.asset("assets/images/regali-aziendali.jpg", width: 200,height: 200,fit: BoxFit.cover,),
                   TextButton(onPressed: (){Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => const Calendar()),
+                      MaterialPageRoute(builder: (context) => const Gifts()),
                     );},
                   style: TextButton.styleFrom(
                     textStyle: GoogleFonts.fjallaOne(),
                     foregroundColor: blu,
                   ),
                   child: const Text(
-                    'Agende e calendari',
+                    'Articoli da regalo',
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
                 ],)) 
               ],
             ),),
-          ],),),
+            Container(height: 70, color: Colors.white),
+          Container(
+                decoration: BoxDecoration(color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.8),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                height: 350,
+                child: Column(
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Spacer(flex: 1),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 120,
+                                  width: 120,
+                                  child: Image.asset(
+                                    'assets/images/4212257.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Text(
+                                  '\n Spedizioni rapide',
+                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                Text(
+                                  "\n La consegna avviene entro 1/5 giorni \n lavorativi con corriere all'indirizzo \n che inserirete in fase di pagamento.",
+                                  style: GoogleFonts.fjallaOne(color: Colors.black,)
+                                )], 
+                                ),
+                          ),Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const SizedBox(width: 30,height: 30,),
+                                SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Image.asset(
+                                    'assets/images/securitypayment.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Text(
+                                  '\n Pagamenti sicuri',
+                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                Text(
+                                  '\n Sul nostro sito sono accettati i \n pagamenti con Bonifico Bancario\n e Paypal, con le principali carte di \n Credito accettate dal circuito:',
+                                  style: GoogleFonts.fjallaOne(color: Colors.black)
+                                )], 
+                                )
+                          ),Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const SizedBox(width: 30,height: 30,),
+                                SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Image.asset(
+                                    'assets/images/italy map.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Text(
+                                  '\n Spedizioni in tutta Italia',
+                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                Text(
+                                  '\n Spediamo in tutta Italia, costi \n di spedizione calcolati in base a peso \n e dimensione del collo da spedire.',
+                                  style: GoogleFonts.fjallaOne(color: Colors.black)
+                                )], 
+                                )
+                          ),const Spacer(flex: 1), // Aggiunge spazio flessibile a destra
+                          ],
+                    ))]))],),),
         );
       }),
       );
@@ -257,12 +345,33 @@ class _MySlideshowState extends State<MySlideshow> {
   late PageController _pageController;
   int _currentPage = 0;
   late Timer _timer;
+  late List<VoidCallback> _imageActions; // Dichiarazione della lista _imageActions
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
     _startTimer();
+    
+    // Inizializzazione della lista _imageActions
+    _imageActions = [
+      () {
+        // Azione per la prima immagine
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Shop()),
+        );
+      },
+      () {
+        // Azione per la seconda immagine
+        // Aggiungi qui la tua azione personalizzata
+      },
+      () {
+        // Azione per la terza immagine
+        // Aggiungi qui la tua azione personalizzata
+      },
+      // Aggiungi altre azioni per le immagini successive
+    ];
   }
 
   @override
@@ -303,13 +412,7 @@ class _MySlideshowState extends State<MySlideshow> {
         itemCount: _images.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {
-              // Azioni da eseguire quando si fa clic sull'immagine
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => Shop()),
-              );
-            },
+            onTap: _imageActions[index], // Utilizzo dell'azione corrispondente
             child: Image.asset(
               _images[index],
               fit: BoxFit.cover,
@@ -325,3 +428,6 @@ class _MySlideshowState extends State<MySlideshow> {
     );
   }
 }
+
+
+     
