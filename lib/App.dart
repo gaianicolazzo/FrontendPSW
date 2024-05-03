@@ -1,12 +1,11 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:frontendpsw/pages/Shop.dart';
-import 'package:frontendpsw/Utils/Constant.dart';
-import 'package:frontendpsw/pages/Cart.dart';
-import 'package:frontendpsw/pages/Contacts.dart';
-import 'package:frontendpsw/pages/Info.dart';
-import 'package:frontendpsw/pages/Login.dart';
+import 'package:flutter/widgets.dart';
+import 'package:frontendpsw/UI/pages/Shop.dart';
+import 'package:frontendpsw/UI/Utils/Constants.dart';
+import 'package:frontendpsw/UI/pages/Cart.dart';
+import 'package:frontendpsw/UI/pages/Contacts.dart';
+import 'package:frontendpsw/UI/pages/Info.dart';
+import 'package:frontendpsw/UI/pages/Login.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
@@ -17,9 +16,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title : APPTITLE,
-      home: HomePage(),
+    return MaterialApp(
+      title : Constants.APPTITLE,
+      home: const HomePage(),
       );
   }
 
@@ -34,135 +33,7 @@ Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
       backgroundColor: Color.fromARGB(255, 240, 240, 240),
-      flexibleSpace: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Container(
-              width: 50,
-              height: 50,
-              child: Image.asset(
-                "assets/images/brand-mycartoleria.jpg",
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const Spacer(flex: 1),
-          Expanded(
-            flex: 1,
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Shop()),
-                );
-              },
-              style: TextButton.styleFrom(
-                textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: arancio,
-              ),
-              child: const Text(
-                'SHOP',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Info()),
-                );
-              },
-              style: TextButton.styleFrom(
-                textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: blu,
-              ),
-              child: const Text(
-                'CHI SIAMO',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Contacts()),
-                );
-              },
-              style: TextButton.styleFrom(
-                textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: arancio,
-              ),
-              child: const Text(
-                'CONTATTI',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: IconButton(
-              color:blu,
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Login()),
-                );
-              },
-              icon: const Icon(Icons.login),
-            ),
-          ),
-          const Expanded(flex : 1 ,child: PreferredSize(preferredSize: Size.fromHeight(20.0),
-            child: Padding(
-              padding: EdgeInsets.all(5.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Cerca...',
-                  labelStyle: TextStyle(color:blu),
-                  border: OutlineInputBorder(borderSide: BorderSide(color:arancio)),
-                  focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: arancio), // Colore del bordo quando il TextField ha il focus
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: arancio), // Colore del bordo quando il TextField non ha il focus
-                ),
-                ),cursorColor: blu,
-              ),
-            ),
-          ),),
-          const Spacer(flex: 1),
-          Expanded(
-            child: ElevatedButton.icon(
-              icon: const Icon(Icons.shopping_bag, color: blu),
-              label: const Text("Carrello"),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-                  return Colors.white;
-                }),
-                foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-                  if (states.contains(MaterialState.pressed)) {
-                    return blu;
-                  }
-                  return blu;
-                }),
-              ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Cart()),
-                );
-              },
-            ),
-          )
-        ],
-      ),
+      flexibleSpace: top(context),
     ),
     body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -188,11 +59,11 @@ Widget build(BuildContext context) {
                       children: [
                         Text(
                           'La tua cartoleria online per la scuola e il tempo libero', 
-                          style: GoogleFonts.pacifico(color: blu,fontSize: 20),
+                          style: GoogleFonts.pacifico(color:Constants.blu,fontSize: 20),
                         ),
                         Text(
                           '\n\n Acquista online e ricevi la merce comodamente a casa.\n Sei della provincia di Catanzaro? Azzera i costi di spedizione. \n Scegli il "ritiro in negozio".',
-                          style: GoogleFonts.fjallaOne(color: blu,),
+                          style: GoogleFonts.fjallaOne(color: Constants.blu,),
                         ),
                         const SizedBox(height: 20),
                         TextButton(
@@ -204,7 +75,7 @@ Widget build(BuildContext context) {
                           },
                           style: TextButton.styleFrom(
                             textStyle: GoogleFonts.fjallaOne(),
-                            foregroundColor: arancio,
+                            foregroundColor: Constants.arancio,
                           ),
                           child: const Text(
                             'Scopri i nostri prodotti',
@@ -262,7 +133,7 @@ Widget build(BuildContext context) {
                                 ),
                                 Text(
                                   '\n Spedizioni rapide',
-                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                  style: GoogleFonts.fjallaOne(color: Constants.arancio),),
                                 Text(
                                   "\n La consegna avviene entro 1/5 giorni \n lavorativi con corriere all'indirizzo \n che inserirete in fase di pagamento.",
                                   style: GoogleFonts.fjallaOne(color: Colors.black,)
@@ -284,7 +155,7 @@ Widget build(BuildContext context) {
                                 ),
                                 Text(
                                   '\n Pagamenti sicuri',
-                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                  style: GoogleFonts.fjallaOne(color: Constants.arancio),),
                                 Text(
                                   '\n Sul nostro sito sono accettati i \n pagamenti con Bonifico Bancario\n e Paypal, con le principali carte di \n Credito accettate dal circuito:',
                                   style: GoogleFonts.fjallaOne(color: Colors.black)
@@ -306,7 +177,7 @@ Widget build(BuildContext context) {
                                 ),
                                 Text(
                                   '\n Spedizioni in tutta Italia',
-                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                  style: GoogleFonts.fjallaOne(color: Constants.arancio),),
                                 Text(
                                   '\n Spediamo in tutta Italia, costi \n di spedizione calcolati in base a peso \n e dimensione del collo da spedire.',
                                   style: GoogleFonts.fjallaOne(color: Colors.black)
@@ -318,6 +189,131 @@ Widget build(BuildContext context) {
             )),]
       ,),),
   );}));}
+
+
+
+
+
+  top(BuildContext context){ 
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Container(
+              width: 50,
+              height: 50,
+              child: GestureDetector(
+                child: Image.asset(
+                "assets/images/brand-mycartoleria.jpg",
+                fit: BoxFit.cover,
+              ),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                );
+              },
+            ),
+          )
+          ),
+          const Spacer(flex: 1),
+          Expanded(
+            flex: 1,
+            child: TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Shop()),
+                );
+              },
+              style: TextButton.styleFrom(
+                textStyle: GoogleFonts.fjallaOne(),
+                foregroundColor: Constants.arancio,
+              ),
+              child: const Text(
+                'SHOP',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Info()),
+                );
+              },
+              style: TextButton.styleFrom(
+                textStyle: GoogleFonts.fjallaOne(),
+                foregroundColor: Constants.blu,
+              ),
+              child: const Text(
+                'CHI SIAMO',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Contacts()),
+                );
+              },
+              style: TextButton.styleFrom(
+                textStyle: GoogleFonts.fjallaOne(),
+                foregroundColor: Constants.arancio,
+              ),
+              child: const Text(
+                'CONTATTI',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: IconButton(
+              color: Constants.blu,
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Login()),
+                );
+              },
+              icon: const Icon(Icons.login),
+            ),
+          ),
+          const Spacer(flex: 1),
+          Expanded(
+            child: ElevatedButton.icon(
+              icon: Icon(Icons.shopping_bag, color: Constants.blu),
+              label: const Text("Carrello"),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  return Colors.white;
+                }),
+                foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return Constants.blu;
+                  }
+                  return Constants.blu;
+                }),
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Cart()),
+                );
+              },
+            ),
+          )
+        ],
+      );}
 }
 
 

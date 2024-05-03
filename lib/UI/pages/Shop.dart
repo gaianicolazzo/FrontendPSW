@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:frontendpsw/Utils/Constant.dart';
-import 'package:frontendpsw/pages/Backpack.dart';
-import 'package:frontendpsw/pages/Calendar.dart';
-import 'package:frontendpsw/pages/Gifts.dart';
-import 'package:frontendpsw/pages/Stationery.dart';
+import 'package:frontendpsw/UI/Utils/Constants.dart';
+
+import 'package:frontendpsw/UI/pages/Backpack.dart';
+
+import 'package:frontendpsw/UI/pages/Gifts.dart';
+import 'package:frontendpsw/UI/pages/Products.dart';
+import 'package:frontendpsw/UI/pages/Stationery.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:frontendpsw/pages/Cart.dart';
-import 'package:frontendpsw/pages/Contacts.dart';
-import 'package:frontendpsw/pages/Info.dart';
-import 'package:frontendpsw/pages/Login.dart';
+import 'package:frontendpsw/UI/pages/Cart.dart';
+import 'package:frontendpsw/UI/pages/Contacts.dart';
+import 'package:frontendpsw/UI/pages/Info.dart';
+import 'package:frontendpsw/UI/pages/Login.dart';
 
 class Shop extends StatelessWidget {
   const Shop({super.key});
@@ -46,7 +48,7 @@ class Shop extends StatelessWidget {
               },
               style: TextButton.styleFrom(
                 textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: arancio,
+                foregroundColor: Constants.arancio,
               ),
               child: const Text(
                 'SHOP',
@@ -65,7 +67,7 @@ class Shop extends StatelessWidget {
               },
               style: TextButton.styleFrom(
                 textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: blu,
+                foregroundColor: Constants.blu,
               ),
               child: const Text(
                 'CHI SIAMO',
@@ -84,7 +86,7 @@ class Shop extends StatelessWidget {
               },
               style: TextButton.styleFrom(
                 textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: arancio,
+                foregroundColor: Constants.arancio,
               ),
               child: const Text(
                 'CONTATTI',
@@ -95,7 +97,7 @@ class Shop extends StatelessWidget {
           Expanded(
             flex: 1,
             child: IconButton(
-              color:blu,
+              color: Constants.blu,
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
@@ -105,28 +107,10 @@ class Shop extends StatelessWidget {
               icon: const Icon(Icons.login),
             ),
           ),
-          const Expanded(flex : 1 ,child: PreferredSize(preferredSize: Size.fromHeight(20.0),
-            child: Padding(
-              padding: EdgeInsets.all(5.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Cerca...',
-                  labelStyle: TextStyle(color:blu),
-                  border: OutlineInputBorder(borderSide: BorderSide(color:arancio)),
-                  focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: arancio), // Colore del bordo quando il TextField ha il focus
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: arancio), // Colore del bordo quando il TextField non ha il focus
-                ),
-                ),cursorColor: blu,
-              ),
-            ),
-          ),),
           const Spacer(flex: 1),
           Expanded(
             child: ElevatedButton.icon(
-              icon: const Icon(Icons.shopping_bag, color: blu),
+              icon: Icon(Icons.shopping_bag, color: Constants.blu),
               label: const Text("Carrello"),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
@@ -134,9 +118,9 @@ class Shop extends StatelessWidget {
                 }),
                 foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
                   if (states.contains(MaterialState.pressed)) {
-                    return blu;
+                    return Constants.blu;
                   }
-                  return blu;
+                  return Constants.arancio;
                 }),
               ),
               onPressed: () {
@@ -160,7 +144,7 @@ class Shop extends StatelessWidget {
             Center(
               child: Text(
                 "Le nostre categorie",
-                style: GoogleFonts.pacifico(color: blu, fontSize: 28),
+                style: GoogleFonts.pacifico(color: Constants.blu, fontSize: 28),
               ),
             ),),
             Container(height: 30, color: Colors.white),
@@ -175,23 +159,23 @@ class Shop extends StatelessWidget {
                     );},
                   style: TextButton.styleFrom(
                     textStyle: GoogleFonts.fjallaOne(),
-                    foregroundColor: blu,
+                    foregroundColor: Constants.blu,
                   ),
                   child: const Text(
                     'Zaini, borse \n e borsellini',
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
-
+                Container(height: 30, color: Colors.white),
                 ],)),
                 Expanded(child: Column(children: [
                   Image.asset("assets/images/banner-mob.png", width: 200,height: 200,fit: BoxFit.cover,),
                   TextButton(onPressed: (){Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => const Calendar()),
+                      MaterialPageRoute(builder: (context) => const Products()),
                     );},
                   style: TextButton.styleFrom(
                     textStyle: GoogleFonts.fjallaOne(),
-                    foregroundColor: blu,
+                    foregroundColor: Constants.blu,
                   ),
                   child: const Text(
                     'Agende e calendari',
@@ -212,7 +196,7 @@ class Shop extends StatelessWidget {
                     );},
                   style: TextButton.styleFrom(
                     textStyle: GoogleFonts.fjallaOne(),
-                    foregroundColor: blu,
+                    foregroundColor: Constants.blu,
                   ),
                   child: const Text(
                     'Cancelleria e \n oggetti per ufficio',
@@ -228,7 +212,7 @@ class Shop extends StatelessWidget {
                     );},
                   style: TextButton.styleFrom(
                     textStyle: GoogleFonts.fjallaOne(),
-                    foregroundColor: blu,
+                    foregroundColor: Constants.blu,
                   ),
                   child: const Text(
                     'Articoli da regalo',
@@ -275,7 +259,7 @@ class Shop extends StatelessWidget {
                                 ),
                                 Text(
                                   '\n Spedizioni rapide',
-                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                  style: GoogleFonts.fjallaOne(color: Constants.arancio),),
                                 Text(
                                   "\n La consegna avviene entro 1/5 giorni \n lavorativi con corriere all'indirizzo \n che inserirete in fase di pagamento.",
                                   style: GoogleFonts.fjallaOne(color: Colors.black,)
@@ -297,7 +281,7 @@ class Shop extends StatelessWidget {
                                 ),
                                 Text(
                                   '\n Pagamenti sicuri',
-                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                  style: GoogleFonts.fjallaOne(color: Constants.arancio),),
                                 Text(
                                   '\n Sul nostro sito sono accettati i \n pagamenti con Bonifico Bancario\n e Paypal, con le principali carte di \n Credito accettate dal circuito:',
                                   style: GoogleFonts.fjallaOne(color: Colors.black)
@@ -319,7 +303,7 @@ class Shop extends StatelessWidget {
                                 ),
                                 Text(
                                   '\n Spedizioni in tutta Italia',
-                                  style: GoogleFonts.fjallaOne(color: arancio),),
+                                  style: GoogleFonts.fjallaOne(color: Constants.arancio),),
                                 Text(
                                   '\n Spediamo in tutta Italia, costi \n di spedizione calcolati in base a peso \n e dimensione del collo da spedire.',
                                   style: GoogleFonts.fjallaOne(color: Colors.black)

@@ -1,0 +1,53 @@
+import 'dart:convert';
+
+Product productFromJson(String str) => Product.fromJson(json.decode(str));
+
+String productToJson(Product data) => json.encode(data.toJson());
+
+class Product {
+    String name;
+    String barCode;
+    int prize;
+    int availablePz;
+    DateTime creatData;
+    String descr;
+    String color;
+    String category;
+    dynamic brand;
+
+    Product({
+        required this.name,
+        required this.barCode,
+        required this.prize,
+        required this.availablePz,
+        required this.creatData,
+        required this.descr,
+        required this.color,
+        required this.category,
+        required this.brand,
+    });
+
+    factory Product.fromJson(Map<String, dynamic> json) => Product(
+        name: json["name"],
+        barCode: json["barCode"],
+        prize: json["prize"],
+        availablePz: json["availablePz"],
+        creatData: DateTime.parse(json["creatData"]),
+        descr: json["descr"],
+        color: json["color"],
+        category: json["category"],
+        brand: json["brand"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "name": name,
+        "barCode": barCode,
+        "prize": prize,
+        "availablePz": availablePz,
+        "creatData": creatData.toIso8601String(),
+        "descr": descr,
+        "color": color,
+        "category": category,
+        "brand": brand,
+    };
+}
