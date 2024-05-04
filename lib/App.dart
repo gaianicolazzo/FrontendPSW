@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:frontendpsw/UI/Utils/Top.dart';
 import 'package:frontendpsw/UI/pages/Shop.dart';
 import 'package:frontendpsw/UI/Utils/Constants.dart';
 import 'package:frontendpsw/UI/pages/Cart.dart';
@@ -33,7 +34,7 @@ Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
       backgroundColor: Color.fromARGB(255, 240, 240, 240),
-      flexibleSpace: top(context),
+      actions: Top(context),
     ),
     body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -68,7 +69,7 @@ Widget build(BuildContext context) {
                         const SizedBox(height: 20),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushReplacement(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => const Shop()),
                             );
@@ -108,7 +109,7 @@ Widget build(BuildContext context) {
                     ),
                   ],
                 ),
-                height: 350,
+                height: 400,
                 child: Column(
                   children: [
                     Container(
@@ -194,126 +195,7 @@ Widget build(BuildContext context) {
 
 
 
-  top(BuildContext context){ 
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Container(
-              width: 50,
-              height: 50,
-              child: GestureDetector(
-                child: Image.asset(
-                "assets/images/brand-mycartoleria.jpg",
-                fit: BoxFit.cover,
-              ),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-              },
-            ),
-          )
-          ),
-          const Spacer(flex: 1),
-          Expanded(
-            flex: 1,
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Shop()),
-                );
-              },
-              style: TextButton.styleFrom(
-                textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: Constants.arancio,
-              ),
-              child: const Text(
-                'SHOP',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Info()),
-                );
-              },
-              style: TextButton.styleFrom(
-                textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: Constants.blu,
-              ),
-              child: const Text(
-                'CHI SIAMO',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Contacts()),
-                );
-              },
-              style: TextButton.styleFrom(
-                textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: Constants.arancio,
-              ),
-              child: const Text(
-                'CONTATTI',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: IconButton(
-              color: Constants.blu,
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Login()),
-                );
-              },
-              icon: const Icon(Icons.login),
-            ),
-          ),
-          const Spacer(flex: 1),
-          Expanded(
-            child: ElevatedButton.icon(
-              icon: Icon(Icons.shopping_bag, color: Constants.blu),
-              label: const Text("Carrello"),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-                  return Colors.white;
-                }),
-                foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-                  if (states.contains(MaterialState.pressed)) {
-                    return Constants.blu;
-                  }
-                  return Constants.blu;
-                }),
-              ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Cart()),
-                );
-              },
-            ),
-          )
-        ],
-      );}
+  
 }
 
 
@@ -339,7 +221,7 @@ class _MySlideshowState extends State<MySlideshow> {
     _imageActions = [
       () {
         // Azione per la prima immagine
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Shop()),
         );

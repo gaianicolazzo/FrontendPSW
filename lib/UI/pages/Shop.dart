@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:frontendpsw/UI/Utils/Constants.dart';
+import 'package:frontendpsw/UI/Utils/Top.dart';
 
 import 'package:frontendpsw/UI/pages/Backpack.dart';
 
@@ -8,10 +9,7 @@ import 'package:frontendpsw/UI/pages/Gifts.dart';
 import 'package:frontendpsw/UI/pages/Products.dart';
 import 'package:frontendpsw/UI/pages/Stationery.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:frontendpsw/UI/pages/Cart.dart';
-import 'package:frontendpsw/UI/pages/Contacts.dart';
-import 'package:frontendpsw/UI/pages/Info.dart';
-import 'package:frontendpsw/UI/pages/Login.dart';
+
 
 class Shop extends StatelessWidget {
   const Shop({super.key});
@@ -22,117 +20,7 @@ class Shop extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 240, 240, 240),
-      flexibleSpace: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Container(
-              width: 50,
-              height: 50,
-              child: Image.asset(
-                "assets/images/brand-mycartoleria.jpg",
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const Spacer(flex: 1),
-          Expanded(
-            flex: 1,
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Shop()),
-                );
-              },
-              style: TextButton.styleFrom(
-                textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: Constants.arancio,
-              ),
-              child: const Text(
-                'SHOP',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Info()),
-                );
-              },
-              style: TextButton.styleFrom(
-                textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: Constants.blu,
-              ),
-              child: const Text(
-                'CHI SIAMO',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Contacts()),
-                );
-              },
-              style: TextButton.styleFrom(
-                textStyle: GoogleFonts.fjallaOne(),
-                foregroundColor: Constants.arancio,
-              ),
-              child: const Text(
-                'CONTATTI',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: IconButton(
-              color: Constants.blu,
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Login()),
-                );
-              },
-              icon: const Icon(Icons.login),
-            ),
-          ),
-          const Spacer(flex: 1),
-          Expanded(
-            child: ElevatedButton.icon(
-              icon: Icon(Icons.shopping_bag, color: Constants.blu),
-              label: const Text("Carrello"),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-                  return Colors.white;
-                }),
-                foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-                  if (states.contains(MaterialState.pressed)) {
-                    return Constants.blu;
-                  }
-                  return Constants.arancio;
-                }),
-              ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Cart()),
-                );
-              },
-            ),
-          )
-        ],
-      ),
+      actions: Top(context), 
       ), 
       body: LayoutBuilder(builder: (BuildContext context,BoxConstraints constraints){
         return SingleChildScrollView(
@@ -154,7 +42,7 @@ class Shop extends StatelessWidget {
               children: [
                 Expanded(child: Column(children: [
                   Image.asset("assets/images/backpack.png", width: 200,height: 200,fit: BoxFit.cover,),
-                  TextButton(onPressed: (){Navigator.pushReplacement(context,
+                  TextButton(onPressed: (){Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Backpack()),
                     );},
                   style: TextButton.styleFrom(
@@ -170,7 +58,7 @@ class Shop extends StatelessWidget {
                 ],)),
                 Expanded(child: Column(children: [
                   Image.asset("assets/images/banner-mob.png", width: 200,height: 200,fit: BoxFit.cover,),
-                  TextButton(onPressed: (){Navigator.pushReplacement(context,
+                  TextButton(onPressed: (){Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Products()),
                     );},
                   style: TextButton.styleFrom(
@@ -191,7 +79,7 @@ class Shop extends StatelessWidget {
               children: [
                 Expanded(child: Column(children: [
                   Image.asset("assets/images/cancelleria-696x464.jpg", width: 200,height: 200,fit: BoxFit.cover,),
-                  TextButton(onPressed: (){Navigator.pushReplacement(context,
+                  TextButton(onPressed: (){Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Stationery()),
                     );},
                   style: TextButton.styleFrom(
@@ -207,7 +95,7 @@ class Shop extends StatelessWidget {
                 ],)),
                 Expanded(child: Column(children: [
                   Image.asset("assets/images/regali-aziendali.jpg", width: 200,height: 200,fit: BoxFit.cover,),
-                  TextButton(onPressed: (){Navigator.pushReplacement(context,
+                  TextButton(onPressed: (){Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Gifts()),
                     );},
                   style: TextButton.styleFrom(
@@ -341,9 +229,9 @@ class _MySlideshowState extends State<MySlideshow> {
     _imageActions = [
       () {
         // Azione per la prima immagine
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Shop()),
+          MaterialPageRoute(builder: (context) => const Shop()),
         );
       },
       () {

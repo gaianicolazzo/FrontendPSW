@@ -21,4 +21,21 @@ class ProductService{
     }
     return null;
   }
+
+  Future<List<Product>?> getFilteredProducts(String category) async{
+    try {
+      final queryParameters = {
+      "category" : category,
+};
+      var url = Uri.http(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_FILTERED_PRODUCTS,queryParameters);
+      var response = await http.get(url);
+      if(response.statusCode==200){
+        List<Product> _product = productFromJson(response.body);
+        return _product;
+      }
+    } catch (e) {  
+      log(e.toString());
+    }
+    return null;
+  }
 }

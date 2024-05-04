@@ -8,6 +8,6 @@ class Constants{
   
 
   static final String REQUEST_PRODUCTS = '/product';
-  static final String REQUEST_FILTERED_PRODUCTS = '/product/';
+  static final String REQUEST_FILTERED_PRODUCTS = '/product/filtered';
 
 }
