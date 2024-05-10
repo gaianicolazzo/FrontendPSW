@@ -9,5 +9,10 @@ class Constants{
 
   static final String REQUEST_PRODUCTS = '/product';
   static final String REQUEST_FILTERED_PRODUCTS = '/product/filtered';
+  static final String REQUEST_LOGIN = '/api/v1/auth/authenticate';
+  static final String REQUEST_REGISTRATION = '/api/v1/auth/register';
+  static final String REQUEST_ADDPRODUCT = '/admin/product';
+  static final String REQUEST_ADDBRAND = '/admin/brand';
+
 
 }

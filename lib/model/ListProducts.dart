@@ -9,7 +9,7 @@ String productToJson(List<Product> data) => json.encode(List<dynamic>.from(data.
 class Product {
     String name;
     String barCode;
-    int prize;
+    double prize;
     int availablePz;
     DateTime creatData;
     String descr;

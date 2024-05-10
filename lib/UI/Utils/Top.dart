@@ -4,10 +4,12 @@ import 'package:frontendpsw/UI/pages/Cart.dart';
 import 'package:frontendpsw/UI/pages/Contacts.dart';
 import 'package:frontendpsw/UI/pages/Info.dart';
 import 'package:frontendpsw/UI/pages/Login.dart';
-import 'package:frontendpsw/UI/pages/Shop.dart';
+import 'package:frontendpsw/UI/pages/Products.dart';
+import 'package:frontendpsw/UI/pages/Profile.dart';
+//import 'package:frontendpsw/UI/pages/Shop.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Top(BuildContext context){ 
+Top(BuildContext context, isLogged){ 
     return /* Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,7 +32,7 @@ Top(BuildContext context){
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Shop()),
+                  MaterialPageRoute(builder: (context) => const Products()),
                 );
               },
               style: TextButton.styleFrom(
@@ -83,17 +85,27 @@ Top(BuildContext context){
           ),
           Expanded(
             flex: 1,
-            child: IconButton(
-              color:Constants.blu,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Login() ),
-                );
-              },
+            child:
+              !isLogged ?
+                IconButton(
+                  color:Constants.blu,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Login() ),
+                    );
+                  },
               icon: const Icon(Icons.account_circle_outlined),
-            ),
-          ),
+            ) : IconButton(
+                  color:Constants.blu,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Profile() ),
+                    );
+                  },
+              icon: const Icon(Icons.account_circle_outlined),
+          ),),
           const Spacer(flex: 1),
           Expanded(
             child: ElevatedButton.icon(

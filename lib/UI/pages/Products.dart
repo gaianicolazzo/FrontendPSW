@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:frontendpsw/UI/Utils/Constants.dart';
 import 'package:frontendpsw/UI/Utils/ProductCard.dart';
 import 'package:frontendpsw/UI/Utils/Top.dart';
 import 'package:frontendpsw/model/ListProducts.dart';
 import 'package:frontendpsw/model/services/ProductService.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Products extends StatefulWidget{
   
@@ -25,8 +24,13 @@ class _ProductsState extends State<Products>{
     return Scaffold(
       appBar: AppBar(
       backgroundColor: Color.fromARGB(255, 240, 240, 240),
-      actions: Top(context),
-      ),
+      surfaceTintColor: Color.fromARGB(255, 240, 240, 240),
+      elevation: 2,
+      shadowColor: Colors.black,
+      actions:
+      getToken() == null ? 
+          Top(context, false) : Top(context, true), 
+      ), 
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return SingleChildScrollView(
@@ -37,16 +41,110 @@ class _ProductsState extends State<Products>{
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-              Container( color: Colors.white,
+              Container( color: Color.fromARGB(255, 240, 240, 240),
               child: 
-                  FilterBar(),
-                ),],)
+                  const FilterBar(),
+                ),
+                Container(
+                decoration: BoxDecoration(color: Color.fromARGB(255, 240, 240, 240),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.8),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                height: 350,
+                child: Column(
+                  children: [
+                    Container(
+                      color: Color.fromARGB(255, 240, 240, 240),
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Spacer(flex: 1),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 120,
+                                  width: 120,
+                                  child: Image.asset(
+                                    'assets/images/4212257.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Text(
+                                  '\n Spedizioni rapide',
+                                  style: GoogleFonts.fjallaOne(color: Constants.arancio),),
+                                Text(
+                                  "\n La consegna avviene entro 1/5 giorni \n lavorativi con corriere all'indirizzo \n che inserirete in fase di pagamento.",
+                                  style: GoogleFonts.fjallaOne(color: Colors.black,)
+                                )], 
+                                ),
+                          ),Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const SizedBox(width: 30,height: 30,),
+                                SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Image.asset(
+                                    'assets/images/securitypayment.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Text(
+                                  '\n Pagamenti sicuri',
+                                  style: GoogleFonts.fjallaOne(color: Constants.arancio),),
+                                Text(
+                                  '\n Sul nostro sito sono accettati i \n pagamenti con Bonifico Bancario\n e Paypal, con le principali carte di \n Credito accettate dal circuito:',
+                                  style: GoogleFonts.fjallaOne(color: Colors.black)
+                                )], 
+                                )
+                          ),Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const SizedBox(width: 30,height: 30,),
+                                SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Image.asset(
+                                    'assets/images/italy map.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Text(
+                                  '\n Spedizioni in tutta Italia',
+                                  style: GoogleFonts.fjallaOne(color: Constants.arancio),),
+                                Text(
+                                  '\n Spediamo in tutta Italia, costi \n di spedizione calcolati in base a peso \n e dimensione del collo da spedire.',
+                                  style: GoogleFonts.fjallaOne(color: Colors.black)
+                                )], 
+                                )
+                          ),const Spacer(flex: 1), // Aggiunge spazio flessibile a destra
+                          ],
+                    ))
+                ],)
               )
-          );}
+          ])));}
       )
     );
   }
   
+  getToken() async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getString("token");
+  }
  
 }
 
@@ -88,12 +186,14 @@ void _getFilteredProducts(String category) async{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center
-          ,children: [ 
+          ,children: [
           SizedBox(
-          height: MediaQuery.of(context).size.height,width: 200 , child: Drawer(backgroundColor: Colors.white,
+          height: MediaQuery.of(context).size.height,width: 200 , child: Drawer(backgroundColor: Color.fromARGB(255, 240, 240, 240),surfaceTintColor: Colors.white,
+          elevation: 16, shadowColor: Colors.black,shape: ContinuousRectangleBorder(),
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
+                const SizedBox(height: 10,),
                 Text("Categoria", style: GoogleFonts.fjallaOne(color: Constants.blu, fontSize: 20),),
                 ListTile(
                 title: Text('Zaini', style: GoogleFonts.playfairDisplay(fontSize : 15),),

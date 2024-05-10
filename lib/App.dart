@@ -3,10 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:frontendpsw/UI/Utils/Top.dart';
 import 'package:frontendpsw/UI/pages/Shop.dart';
 import 'package:frontendpsw/UI/Utils/Constants.dart';
-import 'package:frontendpsw/UI/pages/Cart.dart';
-import 'package:frontendpsw/UI/pages/Contacts.dart';
-import 'package:frontendpsw/UI/pages/Info.dart';
-import 'package:frontendpsw/UI/pages/Login.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
@@ -19,22 +16,34 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title : Constants.APPTITLE,
-      home: const HomePage(),
+      home: HomePage(isLogged: false,),
       );
   }
 
 }
 
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  final bool isLogged; 
+
+  const HomePage({Key? key, required this.isLogged}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState(isLogged: isLogged); 
+}
+
+class _HomePageState extends State<HomePage> {
+  final bool isLogged; 
+
+  _HomePageState({required this.isLogged}); 
 
  @override
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
       backgroundColor: Color.fromARGB(255, 240, 240, 240),
-      actions: Top(context),
+      surfaceTintColor: Color.fromARGB(255, 240, 240, 240),
+      actions: Top(context, isLogged),
     ),
     body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -190,15 +199,11 @@ Widget build(BuildContext context) {
             )),]
       ,),),
   );}));}
-
-
-
-
+  
+  
 
   
 }
-
-
 
 class MySlideshow extends StatefulWidget {
   @override
@@ -209,7 +214,7 @@ class _MySlideshowState extends State<MySlideshow> {
   late PageController _pageController;
   int _currentPage = 0;
   late Timer _timer;
-  late List<VoidCallback> _imageActions; // Dichiarazione della lista _imageActions
+
 
   @override
   void initState() {
@@ -217,25 +222,6 @@ class _MySlideshowState extends State<MySlideshow> {
     _pageController = PageController();
     _startTimer();
     
-    // Inizializzazione della lista _imageActions
-    _imageActions = [
-      () {
-        // Azione per la prima immagine
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Shop()),
-        );
-      },
-      () {
-        // Azione per la seconda immagine
-        // Aggiungi qui la tua azione personalizzata
-      },
-      () {
-        // Azione per la terza immagine
-        // Aggiungi qui la tua azione personalizzata
-      },
-      // Aggiungi altre azioni per le immagini successive
-    ];
   }
 
   @override
@@ -276,7 +262,6 @@ class _MySlideshowState extends State<MySlideshow> {
         itemCount: _images.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: _imageActions[index], // Utilizzo dell'azione corrispondente
             child: Image.asset(
               _images[index],
               fit: BoxFit.cover,

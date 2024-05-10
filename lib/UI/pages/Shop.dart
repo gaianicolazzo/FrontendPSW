@@ -9,6 +9,8 @@ import 'package:frontendpsw/UI/pages/Gifts.dart';
 import 'package:frontendpsw/UI/pages/Products.dart';
 import 'package:frontendpsw/UI/pages/Stationery.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 class Shop extends StatelessWidget {
@@ -17,10 +19,14 @@ class Shop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
       return Scaffold(
         appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 240, 240, 240),
-      actions: Top(context), 
+        surfaceTintColor: Color.fromARGB(255, 240, 240, 240),
+        actions: 
+        getToken() == null ? 
+          Top(context, false) : Top(context, true), 
       ), 
       body: LayoutBuilder(builder: (BuildContext context,BoxConstraints constraints){
         return SingleChildScrollView(
@@ -111,7 +117,7 @@ class Shop extends StatelessWidget {
               ],
             ),),
             Container(height: 70, color: Colors.white),
-          Container(
+            Container(
                 decoration: BoxDecoration(color: Colors.white,
                   boxShadow: [
                     BoxShadow(
@@ -204,6 +210,11 @@ class Shop extends StatelessWidget {
       }),
       );
   }
+  
+  getToken() async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getString("token");
+  }
 }
 
 
@@ -217,7 +228,6 @@ class _MySlideshowState extends State<MySlideshow> {
   late PageController _pageController;
   int _currentPage = 0;
   late Timer _timer;
-  late List<VoidCallback> _imageActions; // Dichiarazione della lista _imageActions
 
   @override
   void initState() {
@@ -225,25 +235,6 @@ class _MySlideshowState extends State<MySlideshow> {
     _pageController = PageController();
     _startTimer();
     
-    // Inizializzazione della lista _imageActions
-    _imageActions = [
-      () {
-        // Azione per la prima immagine
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Shop()),
-        );
-      },
-      () {
-        // Azione per la seconda immagine
-        // Aggiungi qui la tua azione personalizzata
-      },
-      () {
-        // Azione per la terza immagine
-        // Aggiungi qui la tua azione personalizzata
-      },
-      // Aggiungi altre azioni per le immagini successive
-    ];
   }
 
   @override
@@ -284,7 +275,6 @@ class _MySlideshowState extends State<MySlideshow> {
         itemCount: _images.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: _imageActions[index], // Utilizzo dell'azione corrispondente
             child: Image.asset(
               _images[index],
               fit: BoxFit.cover,

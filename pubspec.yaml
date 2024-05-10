@@ -38,6 +38,8 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_typeahead: ^5.2.0
   http: ^1.2.1
+  shared_preferences: ^2.2.3
+  jwt_decoder: ^2.0.1
 
   
 
@@ -78,6 +80,7 @@ flutter:
       - assets/images/banner-mob.png
       - assets/images/cancelleria-696x464.jpg
       - assets/images/regali-aziendali.jpg
+      - assets/images/temperamatite.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

@@ -7,9 +7,8 @@ String productToJson(Product data) => json.encode(data.toJson());
 class Product {
     String name;
     String barCode;
-    int prize;
+    double prize;
     int availablePz;
-    DateTime creatData;
     String descr;
     String color;
     String category;
@@ -20,7 +19,6 @@ class Product {
         required this.barCode,
         required this.prize,
         required this.availablePz,
-        required this.creatData,
         required this.descr,
         required this.color,
         required this.category,
@@ -32,7 +30,6 @@ class Product {
         barCode: json["barCode"],
         prize: json["prize"],
         availablePz: json["availablePz"],
-        creatData: DateTime.parse(json["creatData"]),
         descr: json["descr"],
         color: json["color"],
         category: json["category"],
@@ -44,7 +41,6 @@ class Product {
         "barCode": barCode,
         "prize": prize,
         "availablePz": availablePz,
-        "creatData": creatData.toIso8601String(),
         "descr": descr,
         "color": color,
         "category": category,

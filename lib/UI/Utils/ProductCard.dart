@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontendpsw/model/ListProducts.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -10,6 +11,9 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      surfaceTintColor: Colors.white,
+      shadowColor: Colors.black,
+      elevation: 10,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
@@ -19,10 +23,7 @@ class ProductCard extends StatelessWidget {
           children: [
             Text(
               product.name,
-              style: TextStyle(
-                fontSize: 40,
-                color: Theme.of(context).primaryColor,
-              ),
+              style: GoogleFonts.fjallaOne(color : Colors.black, fontSize : 15)
             ),
             Text(
               product.descr,
