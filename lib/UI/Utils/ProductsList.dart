@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontendpsw/UI/Utils/ProductCard.dart';
-import 'package:frontendpsw/model/ListProducts.dart';
+import 'package:frontendpsw/model/Product.dart';
+
 
 class ProductList extends StatelessWidget {
   final List<Product> products;

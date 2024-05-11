@@ -3,23 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:frontendpsw/UI/Utils/Constants.dart';
 import 'package:frontendpsw/UI/Utils/Top.dart';
 
-import 'package:frontendpsw/UI/pages/Backpack.dart';
+import 'package:frontendpsw/UI/pages/ProductFromCategory.dart';
 
-import 'package:frontendpsw/UI/pages/Gifts.dart';
-import 'package:frontendpsw/UI/pages/Products.dart';
-import 'package:frontendpsw/UI/pages/Stationery.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 
-class Shop extends StatelessWidget {
-  const Shop({super.key});
+
+class Shop extends StatefulWidget {
+  final bool isLogged; 
+
+  const Shop({Key? key, required this.isLogged}) : super(key: key);
+
+  @override
+  State<Shop> createState() => _ShopState(isLogged: isLogged); 
+}
+
+class _ShopState extends State<Shop> {
+  final bool isLogged; 
+
+  _ShopState({required this.isLogged}); 
 
 
   @override
   Widget build(BuildContext context) {
-    
       return Scaffold(
         appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 240, 240, 240),
@@ -49,7 +57,7 @@ class Shop extends StatelessWidget {
                 Expanded(child: Column(children: [
                   Image.asset("assets/images/backpack.png", width: 200,height: 200,fit: BoxFit.cover,),
                   TextButton(onPressed: (){Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Backpack()),
+                      MaterialPageRoute(builder: (context) =>  ProductsFromCategory(isLogged: isLogged,startingFilter:  "zaini e borsellini")),
                     );},
                   style: TextButton.styleFrom(
                     textStyle: GoogleFonts.fjallaOne(),
@@ -65,7 +73,7 @@ class Shop extends StatelessWidget {
                 Expanded(child: Column(children: [
                   Image.asset("assets/images/banner-mob.png", width: 200,height: 200,fit: BoxFit.cover,),
                   TextButton(onPressed: (){Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Products()),
+                      MaterialPageRoute(builder: (context) =>  ProductsFromCategory(isLogged: isLogged, startingFilter: "agende e calendari")),
                     );},
                   style: TextButton.styleFrom(
                     textStyle: GoogleFonts.fjallaOne(),
@@ -86,7 +94,7 @@ class Shop extends StatelessWidget {
                 Expanded(child: Column(children: [
                   Image.asset("assets/images/cancelleria-696x464.jpg", width: 200,height: 200,fit: BoxFit.cover,),
                   TextButton(onPressed: (){Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Stationery()),
+                      MaterialPageRoute(builder: (context) => ProductsFromCategory(isLogged: isLogged, startingFilter: "cancelleria")),
                     );},
                   style: TextButton.styleFrom(
                     textStyle: GoogleFonts.fjallaOne(),
@@ -102,7 +110,7 @@ class Shop extends StatelessWidget {
                 Expanded(child: Column(children: [
                   Image.asset("assets/images/regali-aziendali.jpg", width: 200,height: 200,fit: BoxFit.cover,),
                   TextButton(onPressed: (){Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Gifts()),
+                      MaterialPageRoute(builder: (context) => ProductsFromCategory(isLogged: isLogged, startingFilter: "articoli da regalo"))
                     );},
                   style: TextButton.styleFrom(
                     textStyle: GoogleFonts.fjallaOne(),
@@ -213,7 +221,9 @@ class Shop extends StatelessWidget {
   
   getToken() async{
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString("token");
+    var token = sharedPreferences.getString("token");
+    print(token);
+    return token;
   }
 }
 

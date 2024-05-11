@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:frontendpsw/model/Product.dart';
 
 
-List<Product> productFromJson(String str) => List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
 
-String productToJson(List<Product> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+List<Product> listProductFromJson(String str) => List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
 
+String listproductToJson(List<Product> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+/*
 class Product {
     String name;
     String barCode;
@@ -52,6 +54,5 @@ class Product {
         "category": category,
         "brand": brand,
     };
-
+*/
  
-}

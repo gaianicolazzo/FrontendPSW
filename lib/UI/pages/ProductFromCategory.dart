@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontendpsw/UI/Utils/Constants.dart';
+import 'package:frontendpsw/UI/Utils/Filter.dart';
 import 'package:frontendpsw/UI/Utils/ProductCard.dart';
 import 'package:frontendpsw/UI/Utils/Top.dart';
 import 'package:frontendpsw/model/Product.dart';
@@ -7,19 +8,22 @@ import 'package:frontendpsw/model/services/ProductService.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Products extends StatefulWidget {
-  final bool isLogged; 
+class ProductsFromCategory extends StatefulWidget {
+  final bool isLogged;
+  final String startingFilter; 
 
-  const Products({Key? key, required this.isLogged}) : super(key: key);
+  const ProductsFromCategory({Key? key, required this.isLogged, required this.startingFilter}) : super(key: key);
 
   @override
-  State<Products> createState() => _ProductsState(isLogged: isLogged); 
+  State<ProductsFromCategory> createState() => _ProductsFromCategoryState(isLogged: isLogged, startingFilter: startingFilter); 
 }
 
-class _ProductsState extends State<Products> {
-  final bool isLogged; 
+class _ProductsFromCategoryState extends State<ProductsFromCategory> {
+  final bool isLogged;
+  final String startingFilter;
 
-  _ProductsState({required this.isLogged}); 
+
+  _ProductsFromCategoryState({required this.isLogged, required this.startingFilter}); 
 
 
   @override
@@ -46,7 +50,7 @@ class _ProductsState extends State<Products> {
                 children: [
               Container( color: Color.fromARGB(255, 240, 240, 240),
               child: 
-                  const FilterBar(),
+                  FilterBar(startingFilter : startingFilter),
                 ),
                 Container(
                 decoration: BoxDecoration(color: Color.fromARGB(255, 240, 240, 240),
@@ -156,26 +160,33 @@ class _ProductsState extends State<Products> {
 
 
 class FilterBar extends StatefulWidget{
-  const FilterBar( {super.key});
+  final String startingFilter;
+
+  const FilterBar( {super.key, required this.startingFilter});
 
   @override
-  State<FilterBar> createState() => _FilterBarState();
+  State<FilterBar> createState() => _FilterBarState(startingFilter: startingFilter);
 }
 
 class _FilterBarState extends State<FilterBar> {
   List<Product> _filteredProducts = [];
+  final String startingFilter;
+  
+  _FilterBarState( {required this.startingFilter});
 
 @override
    void initState(){
     super.initState();
-    _getProducts();
+    _getFilteredProducts(startingFilter);
    }
 
+/*
 void _getProducts() async{
     _filteredProducts = (await ProductService().getProducts())!;
     Future.delayed(const Duration(seconds: 1)).then((value)=> setState(() {
     }));
    }
+*/
 
 void _getFilteredProducts(String category) async{
     _filteredProducts = (await ProductService().getFilteredProducts(category))!;

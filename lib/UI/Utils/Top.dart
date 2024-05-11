@@ -32,7 +32,7 @@ Top(BuildContext context, isLogged){
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Products()),
+                  MaterialPageRoute(builder: (context) =>  Products(isLogged: isLogged,)),
                 );
               },
               style: TextButton.styleFrom(

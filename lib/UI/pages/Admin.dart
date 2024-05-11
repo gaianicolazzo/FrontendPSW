@@ -41,7 +41,7 @@ class _AdminState extends State<Admin> {
   Widget _buildOperationScreen() { 
     switch (selectedOperation) {
       case "prodotto":
-        return AggiungiProdottoScreen();
+        return const AggiungiProdottoScreen();
       case "brand":
         return const AggiungiBrandScreen();
       default:

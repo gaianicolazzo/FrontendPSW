@@ -80,7 +80,7 @@ Widget build(BuildContext context) {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const Shop()),
+                              MaterialPageRoute(builder: (context) => Shop(isLogged: isLogged,)),
                             );
                           },
                           style: TextButton.styleFrom(

@@ -98,6 +98,8 @@ final TextEditingController _passwordController = TextEditingController();
     if (statusCode == 200) {
       var response = jsonDecode(res.body);
 
+    sharedPreferences.setString("token", response['access_token']);
+
     Map<String, dynamic> decodedToken = JwtDecoder.decode(response['access_token']);
     // Estrarre informazioni dal token
     String role = decodedToken['role']; // ruolo
