@@ -7,6 +7,8 @@ import 'package:frontendpsw/UI/Utils/Constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -16,26 +18,68 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title : Constants.APPTITLE,
-      home: HomePage(isLogged: false,),
+      home: HomePage(),
       );
   }
 
 }
 
 
-class HomePage extends StatefulWidget {
-  final bool isLogged; 
+class HomePage extends StatefulWidget with  WidgetsBindingObserver{
 
-  const HomePage({Key? key, required this.isLogged}) : super(key: key);
-
+  
   @override
-  State<HomePage> createState() => _HomePageState(isLogged: isLogged); 
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final bool isLogged; 
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+  bool _isLoggedOut = false;
 
-  _HomePageState({required this.isLogged}); 
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+    _checkTokenExpiration();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused && !_isLoggedOut) {
+      _logout();
+    }
+  }
+
+  void _checkTokenExpiration() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? expirationTime = prefs.getInt("token_expiration");
+    if (expirationTime != null && DateTime.now().compareTo(DateTime.parse(expirationTime.toString()))> 1) {
+      _logout();
+    } else if(expirationTime == null){
+      setState(() {
+      _isLoggedOut = true;
+    });
+    }else{
+      _isLoggedOut= false;
+    }
+  }
+
+  void _logout() async {
+    // Esegui il logout
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove("token");
+    await prefs.remove("token_expiration");
+    setState(() {
+      _isLoggedOut = true;
+    });
+  }
+
 
  @override
 Widget build(BuildContext context) {
@@ -43,7 +87,7 @@ Widget build(BuildContext context) {
     appBar: AppBar(
       backgroundColor: Color.fromARGB(255, 240, 240, 240),
       surfaceTintColor: Color.fromARGB(255, 240, 240, 240),
-      actions: Top(context, isLogged),
+      actions: Top(context, !_isLoggedOut),
     ),
     body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -80,7 +124,7 @@ Widget build(BuildContext context) {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Shop(isLogged: isLogged,)),
+                              MaterialPageRoute(builder: (context) => Shop(isLogged: !_isLoggedOut,)),
                             );
                           },
                           style: TextButton.styleFrom(
@@ -200,10 +244,9 @@ Widget build(BuildContext context) {
       ,),),
   );}));}
   
-  
-
-  
 }
+
+
 
 class MySlideshow extends StatefulWidget {
   @override

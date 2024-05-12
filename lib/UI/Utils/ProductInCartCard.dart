@@ -1,7 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontendpsw/model/Product.dart';
+import 'package:flutter/widgets.dart';
 import 'package:frontendpsw/model/ProductsInCart.dart';
 import 'package:frontendpsw/model/services/ProductService.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,8 +11,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ProductInCartCard extends StatefulWidget {
   final ProductInCart product;
+  final Function(ProductInCart) removeFromCart;
 
-  ProductInCartCard({required this.product}) : super();
+  ProductInCartCard({required this.product, required this.removeFromCart}) : super();
 
   @override
   _ProductInCartCardState createState() => _ProductInCartCardState();
@@ -42,7 +44,7 @@ class _ProductInCartCardState extends State<ProductInCartCard> {
               ),
             ),
             Text(
-              "€ "+widget.product.prize.toString(),
+              "\u20AC${widget.product.prize.toStringAsFixed(2)}",
               style: TextStyle(
                 color: Colors.black,
               ),
@@ -82,9 +84,12 @@ class _ProductInCartCardState extends State<ProductInCartCard> {
                     ),
                   ],
                 ),
-                
               ],
             ),
+            TextButton(onPressed: (){
+              ProductService().removeProduct(widget.product.product);
+              widget.removeFromCart(widget.product);
+            }, child: Text("remove", style: TextStyle(color: Colors.black,decoration: TextDecoration.underline,  ),))
           ],
         ),
       ),

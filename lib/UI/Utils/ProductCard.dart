@@ -10,8 +10,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
+  bool isLogged;
 
-  ProductCard({required this.product}) : super();
+  ProductCard({required this.product, required this.isLogged}) : super();
 
   @override
   _ProductCardState createState() => _ProductCardState();
@@ -81,10 +82,15 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                   ],
                 ),
+                
                 IconButton(
                   onPressed: () {
+                    if(widget.isLogged){
                     Product productToAdd = Product(name: widget.product.name, barCode: widget.product.barCode, prize: widget.product.prize, availablePz: quantity, descr: widget.product.descr, color: widget.product.color, category: widget.product.category, brand: widget.product.brand);
                     addInCart(productToAdd);
+                    } else{
+                      displayDialog(context, "Log in to add product in cart");
+                    }
                   },
                   icon: Icon(Icons.shopping_cart),
                 ),

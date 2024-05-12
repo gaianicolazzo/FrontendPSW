@@ -17,4 +17,10 @@ class Constants{
   static final String REQUEST_PRODUCTS_IN_CART = '/cart/productsInCart';
 
   static final String REQUEST_MODIFY_QTY = '/cart/addQty';
+
+  static String REQUEST_REMOVE_PRODUCTS_IN_CART= '/cart/remove';
+
+  static String REQUEST_ORDER = '/cart/order';
+
+  static String REQUEST_LIST_ORDERS = '/client/orders';
 }

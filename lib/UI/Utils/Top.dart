@@ -45,7 +45,7 @@ Top(BuildContext context, isLogged){
               ),
             ),
           ),
-          Expanded(
+          /*Expanded(
             flex: 1,
             child: TextButton(
               onPressed: () {
@@ -82,7 +82,7 @@ Top(BuildContext context, isLogged){
                 style: TextStyle(fontSize: 20),
               ),
             ),
-          ),
+          ),*/
           Expanded(
             flex: 1,
             child:
@@ -101,7 +101,7 @@ Top(BuildContext context, isLogged){
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Profile() ),
+                      MaterialPageRoute(builder: (context) =>  Profile(isLogged: isLogged) ),
                     );
                   },
               icon: const Icon(Icons.account_circle_outlined),
@@ -125,7 +125,7 @@ Top(BuildContext context, isLogged){
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Cart()),
+                  MaterialPageRoute(builder: (context) =>  Cart(isLogged: isLogged)),
                 );
               },
             ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:frontendpsw/UI/pages/Admin.dart';
@@ -77,7 +78,7 @@ final TextEditingController _passwordController = TextEditingController();
   attemptLogIn(String email, String password) async{
     Map<String, String> headers = {"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     "Content-Type":"application/json",};
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
     final Map<String, dynamic> request = {
     "email": '$email',
     "password": '$password'
@@ -93,21 +94,39 @@ final TextEditingController _passwordController = TextEditingController();
   );
   int statusCode = res.statusCode;
 
-    
-
+     Map<String, dynamic> decodedToken;
     if (statusCode == 200) {
       var response = jsonDecode(res.body);
+      // Salva il token e il timestamp corrente nel SharedPreferences
+      decodedToken = JwtDecoder.decode(response['access_token']);
+      String token = response['access_token'];
+      int expirationTime = decodedToken['exp'];
+      int currentTimestamp = DateTime.now().millisecondsSinceEpoch;
+      _prefs.setString("token", token);
+      _prefs.setInt("token_expiration", expirationTime);
 
-    sharedPreferences.setString("token", response['access_token']);
+      // Avvia un Timer per controllare periodicamente se il token è scaduto
+      Timer.periodic(Duration(seconds: 60), (timer) async {
+        int savedExpirationTime = _prefs.getInt("token_expiration") ?? 0;
+        int currentTimestamp = DateTime.now().millisecondsSinceEpoch;
+        if (currentTimestamp > savedExpirationTime) {
+          // Rimuovi il token dal SharedPreferences
+          await _prefs.remove("token");
+          await _prefs.remove("token_expiration");
+          timer.cancel();
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage())); // Interrompi il Timer dopo aver rimosso il token
+      }
+    });
+    
 
-    Map<String, dynamic> decodedToken = JwtDecoder.decode(response['access_token']);
+   
     // Estrarre informazioni dal token
     String role = decodedToken['role']; // ruolo
       if(role == "USER"){
       Navigator.push(
               context,
               MaterialPageRoute(
-              builder: (context) => HomePage(isLogged: true,)
+              builder: (context) => HomePage()
         ), 
       );   
     }else if(role == "ADMIN"){

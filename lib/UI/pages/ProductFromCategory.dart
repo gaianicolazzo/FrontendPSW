@@ -50,7 +50,7 @@ class _ProductsFromCategoryState extends State<ProductsFromCategory> {
                 children: [
               Container( color: Color.fromARGB(255, 240, 240, 240),
               child: 
-                  FilterBar(startingFilter : startingFilter),
+                  FilterBar(startingFilter : startingFilter, isLogged: isLogged),
                 ),
                 Container(
                 decoration: BoxDecoration(color: Color.fromARGB(255, 240, 240, 240),
@@ -161,8 +161,9 @@ class _ProductsFromCategoryState extends State<ProductsFromCategory> {
 
 class FilterBar extends StatefulWidget{
   final String startingFilter;
+  bool isLogged;
 
-  const FilterBar( {super.key, required this.startingFilter});
+   FilterBar( {super.key, required this.startingFilter, required  this.isLogged});
 
   @override
   State<FilterBar> createState() => _FilterBarState(startingFilter: startingFilter);
@@ -261,7 +262,7 @@ void _getFilteredProducts(String category) async{
             children: _filteredProducts.isEmpty
                 ? [const Center(child: CircularProgressIndicator())]
                 : _filteredProducts
-                    .map((product) => ProductCard(product: product))
+                    .map((product) => ProductCard(product: product, isLogged: widget.isLogged,))
                     .toList(),
           ),
         ),
